@@ -19,6 +19,13 @@ return new class extends Migration
             $table->string('medio');
             $table->date('fecha');
 
+            $table->unsignedBigInteger('tematica1_id')->nullable();
+            $table->unsignedBigInteger('tematica2_id')->nullable();
+            $table->unsignedBigInteger('tematica3_id')->nullable();
+            $table->foreign('tematica1_id')->references('id')->on('tematicas');
+            $table->foreign('tematica2_id')->references('id')->on('tematicas');
+            $table->foreign('tematica3_id')->references('id')->on('tematicas');
+
             $table->timestamps();
         });
     }
