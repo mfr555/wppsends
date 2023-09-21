@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Contacto extends Model
+class ComunicacionContacto extends Model
 {
     use HasFactory;
 
@@ -16,12 +15,11 @@ class Contacto extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'tratamiento',
-        'nombre',
-        'apellido',
-        'sexo',
-        'email',
-        'cel',
-        'departamento_id',
+        'contacto_id',
+        'comunicacion_id',
+        'usuario_id',
+        'recepcion',
+        'respuesta_resumida',
+        'respuesta_valoracion',
     ];
 }
