@@ -25,4 +25,9 @@ class Contacto extends Model
         'departamento_id',
         'origen_id',
     ];
+
+    public function getPreferencias(): HasMany
+    {
+        return $this->hasMany(Prefencia::class, 'preferencia_id');
+    }
 }
