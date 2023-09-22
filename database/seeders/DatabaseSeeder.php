@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             DepartamentoSeeder::class,
             UsersSeeder::class,
             TematicasSeeder::class,
+            OrigenSeeder::class,
         ]);
     }
 }
