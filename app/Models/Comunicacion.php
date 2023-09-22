@@ -16,7 +16,7 @@ class Comunicacion extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'disparador',
+        'texto',
         'medio',
         'fecha',
         'tematica_1',

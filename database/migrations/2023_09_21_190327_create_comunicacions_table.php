@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('comunicacions', function (Blueprint $table) {
             $table->id();
-            $table->string('disparador');
+            $table->string('texto');
             $table->string('medio');
             $table->date('fecha');
 
