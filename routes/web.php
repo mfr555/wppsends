@@ -24,6 +24,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
      */
     Route::get('/', 'HomeController@index')->name('app');
 
+    Route::get('/contactar', function(){
+        return view('base-de-datos.contactar');
+    });
+
+    Route::get('/contactos', function(){
+        return view('base-de-datos.administrar-contactos');
+    });
+
     Route::get('/default', function(){
         return view('welcome');
     });

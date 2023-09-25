@@ -28,15 +28,15 @@
 
         <!-- Nav Item - Bases de datos Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link" href="#contactar">
+            <a class="nav-link" href="/contactar">
                 <i class="fas fa-fw fa-phone"></i>
                 <span>Contactar personas</span></a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="#add_contacto">
+            <a class="nav-link" href="/contactos">
                 <i class="fas fa-fw fa-user"></i>
-                <span>Agregar contactos</span></a>
+                <span>Administrar contactos</span></a>
         </li>
 
         <li class="nav-item">
