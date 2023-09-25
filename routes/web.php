@@ -36,6 +36,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         return view('welcome');
     });
 
+    Route::post('/contactos', 'ContactosController@store')->name('contactos');
+
     Route::group(['middleware' => ['guest']], function() {
         /**
          * Register Routes

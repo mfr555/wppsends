@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('apellido');
             $table->enum('sexo', ['Masculino', 'Femenino'])->nullable();
-            $table->string('email');
+            $table->string('email')->nullable();
 
             $table->unsignedBigInteger('departamento_id')->nullable();
             $table->foreign('departamento_id')->references('id')->on('departamentos');

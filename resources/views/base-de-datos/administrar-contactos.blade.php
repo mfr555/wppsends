@@ -23,43 +23,44 @@
                         Ingrese aquí la información del nuevo contacto.
                         <br>Tenga en cuenta que el <b>celular es obligatorio e identificatorio</b> en el sistema.
                     </p>
-                    <form action="" method="POST">
+                    <form action="{{ route('contactos') }}" method="POST">
+                    @csrf
                         <div class="form-group">
-                            <input type="text" class="form-control" id="tratamiento" placeholder="Pastor / Dra. / Lic.">
+                            <input type="text" class="form-control" id="tratamiento" name="tratamiento" placeholder="Pastor / Dra. / Lic.">
                             <small id="tratamientoHelp" class="form-text text-muted">
                                 Escriba aquí el tratamiento especial, si corresponde. Si tiene más de uno escriba el más relevante
                             </small>
                         </div>
                         <div class="row mb-2">
                             <div class="col">
-                                <input type="text" id="nombre" class="form-control" placeholder="Nombre" required>
+                                <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" required>
                             </div>
                             <div class="col">
-                                <input type="text" id="apellido" class="form-control" placeholder="Apellido">
+                                <input type="text" id="apellido" name="apellido" class="form-control" placeholder="Apellido">
                             </div>
                         </div>
-                        <div class="row">
+                        <!--div class="row">
                             <div class="col-auto">
-                                <label for="sexo">Sexo</label>
+                                <label>Sexo</label>
                             </div>
                             <div class="col-auto">
-                                <div class="form-group" id="sexo">
+                                <div class="form-group">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="masculino" value="masculino" required>
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sexoM" name="sexo" value="masculino" required>
                                         <label class="form-check-label" for="masculino">Masculino</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femenino" value="femenino">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sexoF" name="sexo" value="femenino">
                                         <label class="form-check-label" for="femenino">Femenino</label>
                                     </div>
                                 </div>
                             </div>
+                        </div-->
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="cel" name="cel" required placeholder="Celular">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="cel" required placeholder="Celular">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" id="email" placeholder="email">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="email">
                         </div>
                         <div class="form-group">
                             <div class="row">
@@ -67,7 +68,7 @@
                                     <label for="departamento">Departamento</label>
                                 </div>
                                 <div class="col">
-                                    <select class="custom-select" id="departamento">
+                                    <select class="custom-select" id="departamento" name="departamento">
                                         <option selected></option>
                                         <option value="Artigas">Artigas</option>
                                         <option value="Canelones">Canelones</option>
@@ -98,7 +99,7 @@
                                     <label for="origen">Origen del contacto</label>
                                 </div>
                                 <div class="col">
-                                    <select class="custom-select" id="origen">
+                                    <select class="custom-select" id="origen" name="origen">
                                         <option selected></option>
                                     </select>
                                 </div>
