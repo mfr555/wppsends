@@ -27,9 +27,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
     Route::get('/contactar', function(){
         return view('base-de-datos.contactar');
     });
-
     Route::get('/contactos', function(){
         return view('base-de-datos.administrar-contactos');
+    });
+    Route::get('/comunicaciones', function(){
+        return view('base-de-datos.comunicaciones');
     });
 
     Route::get('/default', function(){
@@ -37,6 +39,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
     });
 
     Route::post('/contactos', 'ContactosController@store')->name('contactos');
+    Route::post('/comunicaciones', 'ComunicacionesController@store')->name('comunicaciones');
 
     Route::group(['middleware' => ['guest']], function() {
         /**

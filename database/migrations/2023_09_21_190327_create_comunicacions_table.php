@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('comunicacions', function (Blueprint $table) {
             $table->id();
             $table->string('texto');
-            $table->string('medio');
+            $table->string('medio')->default('WhatsApp');
             $table->date('fecha');
 
             $table->unsignedBigInteger('tematica1_id')->nullable();

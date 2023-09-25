@@ -40,7 +40,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="#comunicaciones">
+            <a class="nav-link" href="/comunicaciones">
                 <i class="fas fa-fw fa-bomb"></i>
                 <span>Campañas de Wpp</span></a>
         </li>
