@@ -23,6 +23,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
      * Home Routes
      */
     Route::get('/', 'HomeController@index')->name('app');
+
     Route::get('/default', function(){
         return view('welcome');
     });

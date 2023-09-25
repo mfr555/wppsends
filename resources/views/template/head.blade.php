@@ -18,4 +18,14 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- WhatsApp styles -->
+    <link href="css/wpp.css" rel="stylesheet">
+
+    <!--Tables core CSS -->
+    <!--link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"-->
+
+    <!-- Custom styles for tables -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
 </head>
