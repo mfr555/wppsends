@@ -241,6 +241,7 @@ th {
 
 label {
     display: inline-block;
+    margin-top: 1rem;
     margin-bottom: .5rem
 }
 

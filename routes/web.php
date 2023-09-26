@@ -30,15 +30,17 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
     Route::get('/contactos', function(){
         return view('base-de-datos.administrar-contactos');
     });
-    Route::get('/comunicaciones', function(){
-        return view('base-de-datos.comunicaciones');
-    });
 
     Route::get('/default', function(){
         return view('welcome');
     });
 
     Route::post('/contactos', 'ContactosController@store')->name('contactos');
+
+    //Route::get('/comunicaciones', function(){
+    //    return view('base-de-datos.comunicaciones');
+    //});
+    Route::get('/comunicaciones', 'ComunicacionesController@showPage');
     Route::post('/comunicaciones', 'ComunicacionesController@store')->name('comunicaciones');
 
     Route::group(['middleware' => ['guest']], function() {

@@ -16,13 +16,13 @@ class TematicasSeeder extends Seeder
     public function run()
     {
         DB::table('tematicas')->insert([
-            'nombre' => '100% cristiana',
+            'nombre' => 'Cristiana',
         ]);
         DB::table('tematicas')->insert([
-            'nombre' => '100% politica',
+            'nombre' => 'Politica',
         ]);
         DB::table('tematicas')->insert([
-            'nombre' => 'Cristiana y política',
+            'nombre' => 'Familia',
         ]);
     }
 }

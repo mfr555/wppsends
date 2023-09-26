@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('comunicacions', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre')->unique();
             $table->string('texto');
             $table->string('medio')->default('WhatsApp');
             $table->date('fecha');
