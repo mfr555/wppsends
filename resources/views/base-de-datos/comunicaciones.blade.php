@@ -113,7 +113,7 @@
                         @foreach ($comunicaciones as $oneCom)
                         <div class="col-3">
                             <div class="border-left-primary shadow rounded">
-                                <div class="card-body">
+                                <div class="card-body mb-3">
                                     <div class="no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
@@ -124,7 +124,7 @@
                                                 <br> Fecha: {{ date('d/m/Y', strtotime($oneCom->fecha)) }}
                                                 <br> Temáticas:
                                                     @isset($oneCom->tematica1_id)
-                                                        <li>{{ $oneCom->tematica1->nombre }}
+                                                        {{ $oneCom->tematica1->nombre }}
                                                     @endisset
                                                     @isset($oneCom->tematica2_id)
                                                         / {{ $oneCom->tematica2->nombre }}

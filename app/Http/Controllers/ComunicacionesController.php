@@ -32,6 +32,8 @@ class ComunicacionesController extends Controller
             'tematica1' => 'required',
         ]);
 
+
+
         //no repetir temáticas
         if ($request->tematica2 != null){
             $request->validate([
@@ -46,14 +48,31 @@ class ComunicacionesController extends Controller
 
 
         $com = new Comunicacion;
-        $com->nombre = $request->nombre;
+        $nombre = str_replace(' ','_',$request->nombre);
+        $nombre = str_replace(',','',$nombre);
+        $nombre = str_replace(';','',$nombre);
+        $nombre = str_replace(':','',$nombre);
+        $nombre = str_replace('/','',$nombre);
+        $nombre = str_replace('\\','',$nombre);
+        $nombre = str_replace('@','',$nombre);
+        $nombre = str_replace('.','',$nombre);
+        $com->nombre = $nombre;
         $com->texto = $request->texto;
-        $tem1 = Tematica::where('nombre', $request->tematica1);
-        $tem2 = Tematica::where('nombre', $request->tematica2);
-        $tem3 = Tematica::where('nombre', $request->tematica3);
-        $com->tematica1_id = $request->tem1;
-        $com->tematica2_id = $request->tem2;
-        $com->tematica3_id = $request->tem3;
+
+        $tem1 = Tematica::where('nombre', $request->tematica1)->get()->first();
+        $com->tematica1_id = $tem1->id;
+
+        $tem2 = Tematica::where('nombre', $request->tematica2)->get()->first();
+        if (isset($tem2)){
+            $com->tematica2_id = $tem2->id;
+        }
+
+        $tem3 = Tematica::where('nombre', $request->tematica3)->get()->first();
+        if (isset($tem3)){
+            $com->tematica3_id = $tem3->id;
+        }
+
+
         $com->fecha = Carbon::now();
 
         $com->save();
