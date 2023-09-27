@@ -15,14 +15,14 @@ class TematicasSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tematicas')->insert([
-            'nombre' => 'Cristiana',
-        ]);
-        DB::table('tematicas')->insert([
-            'nombre' => 'Politica',
-        ]);
-        DB::table('tematicas')->insert([
-            'nombre' => 'Familia',
-        ]);
+        DB::table('tematicas')->insert(['nombre' => 'Cristiana']);
+        DB::table('tematicas')->insert(['nombre' => 'Política']);
+        DB::table('tematicas')->insert(['nombre' => 'Familia']);
+        DB::table('tematicas')->insert(['nombre' => 'Pedofilia']);
+        DB::table('tematicas')->insert(['nombre' => 'Bullying']);
+        DB::table('tematicas')->insert(['nombre' => 'Invitaciones']);
+        DB::table('tematicas')->insert(['nombre' => 'Redes sociales']);
+        DB::table('tematicas')->insert(['nombre' => 'Infancia']);
+        DB::table('tematicas')->insert(['nombre' => 'Pastores']);
     }
 }

@@ -55,7 +55,7 @@
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                 @auth
-                    Yo, {{auth()->user()->name}}
+                    Matías Rodriguez
                 @else
                     Mi sesión
                 @endauth

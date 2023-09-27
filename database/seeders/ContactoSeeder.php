@@ -14,6 +14,6 @@ class ContactoSeeder extends Seeder
      */
     public function run()
     {
-        //
+
     }
 }

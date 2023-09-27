@@ -57,7 +57,8 @@ class ComunicacionesController extends Controller
         $nombre = str_replace('@','',$nombre);
         $nombre = str_replace('.','',$nombre);
         $com->nombre = $nombre;
-        $com->texto = $request->texto;
+
+        $com->texto = str_replace(array("\r\n", "\n\r", "\r", "\n"),'%0A',$request->texto);
 
         $tem1 = Tematica::where('nombre', $request->tematica1)->get()->first();
         $com->tematica1_id = $tem1->id;

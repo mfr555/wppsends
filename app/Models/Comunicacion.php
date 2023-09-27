@@ -24,6 +24,7 @@ class Comunicacion extends Model
         'tematica1_id',
         'tematica2_id',
         'tematica3_id',
+        'activa',
     ];
 
     public function tematicas(): HasMany
