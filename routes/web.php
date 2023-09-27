@@ -24,9 +24,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
      */
     Route::get('/', 'HomeController@index')->name('app');
 
-    Route::get('/contactar', function(){
-        return view('base-de-datos.contactar');
-    });
     Route::get('/contactos', function(){
         return view('base-de-datos.administrar-contactos');
     });
@@ -35,13 +32,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         return view('welcome');
     });
 
+    Route::get('/contactar', 'ContactosController@showPage');
     Route::post('/contactos', 'ContactosController@store')->name('contactos');
 
-    //Route::get('/comunicaciones', function(){
-    //    return view('base-de-datos.comunicaciones');
-    //});
     Route::get('/comunicaciones', 'ComunicacionesController@showPage');
     Route::post('/comunicaciones', 'ComunicacionesController@store')->name('comunicaciones');
+
+    Route::post('/agregar-tematica', 'TematicasController@store')->name('agregar-tematica');
 
     Route::group(['middleware' => ['guest']], function() {
         /**

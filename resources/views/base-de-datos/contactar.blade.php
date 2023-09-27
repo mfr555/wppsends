@@ -24,14 +24,14 @@
             <div class="card shadow mb-4">
                 <!-- Card Header - Accordion -->
                 <div class="accordion">
-                    <a href="#contactarCOMUNICACION1" class="d-block card-header py-3" data-toggle="collapse"
-                        role="button" aria-expanded="false" aria-controls="contactarCOMUNICACION1">
-                        <h6 class="m-0 font-weight-bold text-primary">
-                            Comunicación 1 : Fecha 22/09/2023
-                        </h6>
-                    </a>
-                    <!-- Card Content - Collapse -->
-                    <div class="collapse" id="contactarCOMUNICACION1">
+                    @foreach ($comunicaciones as $comunicacion)
+                        <a href="#contactar{{ $comunicacion->nombre }}" class="d-block card-header py-3" data-toggle="collapse"
+                            role="button" aria-expanded="false" aria-controls="contactar{{ $comunicacion->nombre }}">
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                {{ $comunicacion->nombre }} : Fecha {{ $comunicacion->fecha }}
+                            </h6>
+                        </a>
+                        <div class="collapse" id="contactar{{ $comunicacion->nombre }}">
                         <div class="card-body">
                             <div class="row">
                                 <div class="ccol-xl-3 col-md-6 mb-4">
@@ -45,15 +45,7 @@
                                                 <div class="row no-gutters align-items-center">
                                                     <div class="col mr-2">
                                                         <div class="text-success mb-1">
-
-                                                            Pensando en el futuro, decidimos cuidar nuestro presente. Una infancia sana asegura una adultez más estable.
-                                                            Una vez más, emprendemos una lucha por los derechos de los más preciados, los niños.
-                                                            <br> <br>Dip. Álvaro Dastugue
-                                                            <br> <br>Facebook <br>https://fb.watch/ndC1HRS6X4
-                                                            <br> <br>Instagram <br>https://www.instagram.com/reel/CxgQjSfpPb7
-                                                            <br> <br>X (Twitter) <br>https://x.com/alvarodastugue/status/1705221026437550164
-                                                            <br> <br>Compartamos las buenas noticias.
-
+                                                            {{ $comunicacion->texto }}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -225,6 +217,7 @@
 
                         </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
 

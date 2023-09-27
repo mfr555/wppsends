@@ -51,7 +51,16 @@
 
                             </div>
                             <div class="row col">
-                                <label>Temáticas</label>
+                                <label>
+                                    Temáticas
+                                    <!-- Button trigger modal temática begin -->
+                                        <button type="button" class="btn btn-secondary btn-circle btn-sm ml-2" data-toggle="modal" data-target="#modalAgregarTematica" aria-describedby="Argegar una temática faltante">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    <!-- Button trigger modal temática ends -->
+                                </label>
+
+
                             </div>
                             <div class="row mb-3">
                                 <div class="col">
@@ -97,6 +106,33 @@
                             </div>
                         </form>
 
+                        <!-- Modal Agregar temática begin -->
+                        <div class="modal fade" id="modalAgregarTematica" tabindex="-1" role="dialog" aria-labelledby="modalAgregarTematicaLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Agregar temática</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form action="agregar-tematica" method="POST">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <input type="text" id="nombreTematica" name="nombreTematica" class="form-control"
+                                                placeholder="Nombre de una temática">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancaler</button>
+                                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- Modal Agregar temática ends -->
+
+
                 </div>
             </div>
 
@@ -111,7 +147,7 @@
                 <div class="card-body">
                     <div class="row">
                         @foreach ($comunicaciones as $oneCom)
-                        <div class="col-3">
+                        <div class="col-xl-3 col-md-6 col-sm-12">
                             <div class="border-left-primary shadow rounded">
                                 <div class="card-body mb-3">
                                     <div class="no-gutters align-items-center">

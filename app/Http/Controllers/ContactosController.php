@@ -3,11 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Comunicacion;
 use App\Models\Contacto;
 
 class ContactosController extends Controller
 {
-    //
+
+    public function showPage()
+    {
+        $comunicaciones = Comunicacion::with(['tematica1', 'tematica2', 'tematica3'])->get();
+        $contactos = Contacto::get();
+        return view('base-de-datos.contactar',
+                        ['contactos' => $contactos,
+                         'comunicaciones' => $comunicaciones,
+                        ]);
+    }
+
     public function store(Request $request){
         $request->validate([
             'tratamiento' => 'max:8',
