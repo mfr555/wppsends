@@ -22,6 +22,7 @@ class Contacto extends Model
         'sexo',
         'email',
         'cel',
+        'lista_negra',
         'comentarios',
         'departamento_id',
         'origen_id',

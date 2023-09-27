@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('sexo', ['Masculino', 'Femenino'])->nullable();
             $table->string('comentarios')->default('');
             $table->string('email')->nullable();
+            $table->boolean('lista_negra')->default(0);
 
             $table->unsignedBigInteger('departamento_id')->nullable();
             $table->foreign('departamento_id')->references('id')->on('departamentos');

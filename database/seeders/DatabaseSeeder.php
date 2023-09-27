@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             TematicasSeeder::class,
             ComunicacionsSeeder::class,
             OrigenSeeder::class,
+            ContactoSeeder::class,
         ]);
     }
 }
