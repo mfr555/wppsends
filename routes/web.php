@@ -32,11 +32,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         return view('welcome');
     });
 
-    Route::get('/contactar', 'ContactosController@showPage');
     Route::post('/contactos', 'ContactosController@store')->name('contactos');
 
-    Route::get('/comunicaciones', 'ComunicacionesController@showPage');
+    Route::get('/comunicaciones', 'ComunicacionesController@showAll');
     Route::post('/comunicaciones', 'ComunicacionesController@store')->name('comunicaciones');
+    Route::get('/comunicaciones-abrir', 'ComunicacionesController@showOne');
+    Route::post('/comunicaciones-editar', 'ComunicacionesController@edit');
+    Route::post('/finalizar-comunicacion', 'ComunicacionesController@finalizar');
+
 
     Route::post('/agregar-tematica', 'TematicasController@store')->name('agregar-tematica');
 

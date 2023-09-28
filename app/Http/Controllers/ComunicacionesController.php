@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Comunicacion;
 use App\Models\Tematica;
+use App\Models\Contacto;
 use Carbon\Carbon;
 
 class ComunicacionesController extends Controller
 {
 
-    public function showPage()
-    {
+    public function showAll(Request $request){
         $tematicas = Tematica::get();
         $tematicasStr = array();
         foreach ($tematicas as $one){
@@ -19,10 +19,35 @@ class ComunicacionesController extends Controller
         }
         sort($tematicasStr);
         $comunicaciones = Comunicacion::with(['tematica1', 'tematica2', 'tematica3'])->get();
-        return view('base-de-datos.comunicaciones',
-                        ['tematicas' => $tematicasStr,
-                         'comunicaciones' => $comunicaciones,
+
+        $params = array('tematicas' => $tematicasStr,
+                         'comunicaciones' => $comunicaciones);
+        if (isset($request->succsess)){
+            $parms['succsess'] = $request->succsess;
+        }
+
+        return view('base-de-datos.comunicaciones', $params);
+    }
+
+    public function showOne(Request $request){
+        $request->validate(['id' => 'required|exists:comunicacions']);
+        $com = Comunicacion::where('id',$request->id)->get()->first();
+        $contactos = Contacto::get();
+
+        return view('base-de-datos.contactar',[
+                            'comunicacion' => $com,
+                            'contactos' => $contactos,
                         ]);
+    }
+
+    public function edit(Request $request){
+        $request->validate(['id' => 'required|exists:comunicacions',
+                            'texto' => 'required|min:30']);
+        $com = Comunicacion::where('id', $request->id)->get()->first();
+        $com->texto = $request->texto;
+        $com->save();
+
+        return back()->withInput()->with('success', 'Comunicación editada correctamente');
     }
 
     public function store(Request $request){
@@ -31,8 +56,6 @@ class ComunicacionesController extends Controller
             'texto' => 'required|min:20',
             'tematica1' => 'required',
         ]);
-
-
 
         //no repetir temáticas
         if ($request->tematica2 != null){
@@ -79,4 +102,15 @@ class ComunicacionesController extends Controller
         $com->save();
         return redirect()->route('comunicaciones')->with('success', 'Campaña de comunicación creada correctamente');
     }
+
+    public function finalizar(Request $request){
+        $request->validate(['id' => 'required|exists:comunicacions']);
+
+        $com = Comunicacion::where('id', $request->id)->get()->first();
+        $com->activa = false;
+        $com->save();
+
+        return back()->withInput()->with('success', 'Comunicación finalizada');
+    }
+
 }

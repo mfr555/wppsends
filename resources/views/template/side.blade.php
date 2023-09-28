@@ -26,13 +26,7 @@
             Base de datos
         </div>
 
-        <!-- Nav Item - Bases de datos Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link" href="/contactar">
-                <i class="fas fa-fw fa-phone"></i>
-                <span>Contactar personas</span></a>
-        </li>
-
+        <!-- Nav Item - Bases de datos -->
         <li class="nav-item">
             <a class="nav-link" href="/contactos">
                 <i class="fas fa-fw fa-user"></i>
@@ -41,7 +35,7 @@
 
         <li class="nav-item">
             <a class="nav-link" href="/comunicaciones">
-                <i class="fas fa-fw fa-bomb"></i>
+                <i class="fas fa-fw fa-phone"></i>
                 <span>Campañas de Wpp</span></a>
         </li>
 

@@ -53,7 +53,7 @@ class ComunicacionsSeeder extends Seeder
         DB::table('comunicacions')->insert([
             'nombre' => 'Difusion',
             'texto' => 'Pensando en el futuro, decidimos cuidar nuestro presente. Una infancia sana asegura una adultez más estable. Una vez más, emprendemos una lucha por los derechos de los más preciados, los niños.%0A%0ADip. Álvaro Dastugue%0A%0AFacebook%0Ahttps://fb.watch/ndC1HRS6X4%0A%0AInstagram%0Ahttps://www.instagram.com/reel/CxgQjSfpPb7%0A%0AX (Twitter)%0Ahttps://x.com/alvarodastugue/status/1705221026437550164%0A%0ACompartamos las buenas noticias.',
-            'fecha' => Carbon::parse('2023-08-31'),
+            'fecha' => Carbon::parse('2023-09-24'),
             'tematica1_id' => $politica,
             'tematica2_id' => $redes,
             'tematica3_id' => $infancia,

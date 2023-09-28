@@ -15,7 +15,7 @@
         <div class="col-12">
             <div class="card shadow mb-4" id="comunicaciones">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Crear campaña de comunicación</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Nueva campaña de comunicación</h6>
                 </div>
                 <div class="card-body">
                     <p>
@@ -148,7 +148,7 @@
                     <div class="row">
                         @foreach ($comunicaciones as $oneCom)
                         <div class="col-xl-3 col-md-6 col-sm-12">
-                            <div class="border-left-primary shadow rounded">
+                            <div class="{{ ($oneCom->activa ? 'border-left-success' : 'border-left-danger') }} shadow rounded">
                                 <div class="card-body mb-3">
                                     <div class="no-gutters align-items-center">
                                         <div class="col mr-2">
@@ -169,33 +169,21 @@
                                                         / {{ $oneCom->tematica3->nombre }}
                                                     @endisset
                                             </p>
-                                            <!-- Modal comunicacion begin -->
-                                                <div class="modal fade" id="modalComunicacion{{ $oneCom->nombre }}" tabindex="-1" role="dialog" aria-labelledby="modalComunicacion{{ $oneCom->nombre }}Label" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">{{ $oneCom->nombre }}</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div>{{ $oneCom->texto }}</div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            <!-- Modal comunicacion ends -->
-                                            <!-- Button trigger modal -->
+
                                             <div class="d-flex justify-content-end">
-                                                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalComunicacion{{ $oneCom->nombre }}">
-                                                    Ver texto
-                                                </button>
+                                                @if ($oneCom->activa)
+                                                    <form action="finalizar-comunicacion" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{$oneCom->id}}" >
+                                                        <button class="btn btn-danger mr-3">
+                                                            <i class="fas fa-trash"></i> Finalizar
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                                <a class="btn btn-primary" href="comunicaciones-abrir?id={{ $oneCom->id }}">
+                                                    Abrir
+                                                </a>
                                             </div>
-                                            <!-- Button trigger modal ends -->
 
                                         </div>
                                     </div>
