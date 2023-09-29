@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('usuario_id');
             $table->unsignedBigInteger('contacto_id');
             $table->unsignedBigInteger('comunicacion_id');
-            $table->enum('recepcion', ['Enviado', 'Respondido', 'Error'])->nullable();
+            $table->enum('recepcion', ['Enviado', 'Recibido', 'Respondido', 'Error'])->nullable();
             $table->string('respuesta_resumida')->nullable();
             $table->smallInteger('respuesta_valoracion')->default('0');
 

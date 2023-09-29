@@ -1015,7 +1015,12 @@ class ContactoSeeder extends Seeder
                             92044163,
                             96408237,
                             94928937,
-                            93326019);
+                            93326019,
+                            92209306,
+                            91653014,
+                            94052206,
+                            92942074,
+                        );
         foreach ($listaNegra as $cel){
             $contacto = Contacto::where('cel', $cel)->get()->first();
             $contacto->lista_negra = true;
@@ -1115,7 +1120,6 @@ class ContactoSeeder extends Seeder
                             91263967,
                             91099181,
                             91081001,
-                            96202321,
                             95729309,
                             92496360,
                             99922362,

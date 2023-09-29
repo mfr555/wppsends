@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             ComunicacionsSeeder::class,
             OrigenSeeder::class,
             ContactoSeeder::class,
+            ComunicacionContactoSeeder::Class,
         ]);
     }
 }
