@@ -101,25 +101,25 @@
                                     <thead>
                                         <tr>
                                             <th>Nombre</th>
-                                            <th>Sx</th>
                                             <th>Información</th>
-                                            <th>Respuesta</th>
+                                            <th>Interacción</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>Nombre</th>
-                                            <th>Sx</th>
                                             <th>Información</th>
-                                            <th>Respuesta</th>
+                                            <th>Interacción</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
 
                                         @foreach ($contactos as $contacto)
                                             <tr>
-                                                <td>{{ $contacto->tratamiento .' '. $contacto->nombre .' '. $contacto->apellido }}</td>
                                                 <td>
+                                                    {{ $contacto->tratamiento }}
+                                                    {{ $contacto->nombre }}
+                                                    {{ $contacto->apellido }}
                                                     @if ($contacto->sexo == 'Masculino')
                                                         <i class="fas fa-mars"></i>
                                                     @elseif ($contacto->sexo == 'Femenino')
@@ -127,24 +127,24 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <div class="row">
-                                                        <div class="col-9
-                                                                        @if ($contacto->lista_negra)
-                                                                            text-danger
-                                                                        @endif
-                                                                        ">
-                                                            <div class="font-weight-bold text-light bg-secondary p-1 rounded">{{ $contacto->comentarios }}</div>
-                                                            Cel: {{ $contacto->cel }} <br>
-                                                            <!-- Ult. com. 22/9/23 <br> -->
-                                                            Estado: @if ($contacto->lista_negra == false)
-                                                                        Ok
-                                                                    @elseif ($contacto->sexo == 'Femenino')
-                                                                        Lista negra
-                                                                    @endif <br>
-                                                            Preferencias: Cristiana (falta implementar) <br>
-                                                            Origen: {{ $contacto->origen_id }}
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="d-inline-flex p-2 {{ ($contacto->lista_negra ? 'text-danger' : '') }}">
+                                                            <div class="row">
+                                                                <div class="col-auto">
+                                                                    Origen: {{ $contacto->origen_id }}
+                                                                    <br>
+                                                                    <span class="font-weight-bold font-italic fondo-gris-suave" >
+                                                                        "{{ $contacto->comentarios }}"
+                                                                    </span>
+                                                                    <br>
+                                                                    Cel: {{ $contacto->cel }}
+                                                                    <br>
+                                                                    Estado: {{ ($contacto->lista_negra ? 'Lista negra' : 'Ok') }}
+                                                                </div>
+                                                            </div>
+
                                                         </div>
-                                                        <div class="col-3">
+                                                        <div class="d-inline-flex p-2">
                                                             <!-- Más Información y edición -->
                                                             <button href="#" class="btn btn-info btn-circle btn-sm"
                                                             data-toggle="tooltip" data-placement="left" title="Más Información / Editar">
@@ -155,42 +155,35 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    @if (!$contacto->lista_negra)
-                                                        <div class="card bg-secondary text-white shadow">
-                                                            <div class="card-body">
-                                                                No enviado <br>
-                                                                @if ($comunicacion->activa)
-                                                                    <?php
-                                                                        $textoOk = $comunicacion->texto;
-                                                                        $textoOk = str_replace('{tratamiento}', $contacto->tratamiento, $textoOk);
-                                                                        $textoOk = str_replace('{nombre}', $contacto->nombre, $textoOk);
-                                                                        if ($contacto->apellido != ''){
-                                                                            $nombreCompleto =  $contacto->nombre.' '.$contacto->apellido;
-                                                                        } else {
-                                                                            $nombreCompleto = $contacto->nombre;
-                                                                        }
-                                                                        $textoOk = str_replace('{nombreCompleto}', $nombreCompleto, $textoOk);
-                                                                        if ($contacto->sexo == 'Masculino'){
-                                                                            $oa = 'o';
-                                                                        } else if ($contacto->sexo == 'Femenino'){
-                                                                            $oa = 'a';
-                                                                        } else {
-                                                                            $oa = '';
-                                                                        }
-                                                                        $textoOk = str_replace('{o/a}', $oa, $textoOk);
+                                                    @if (!$contacto->lista_negra && $comunicacion->activa)
+                                                        <?php
+                                                            $textoOk = $comunicacion->texto;
+                                                            $textoOk = str_replace('{tratamiento}', $contacto->tratamiento, $textoOk);
+                                                            $textoOk = str_replace('{nombre}', $contacto->nombre, $textoOk);
+                                                            if ($contacto->apellido != ''){
+                                                                $nombreCompleto =  $contacto->nombre.' '.$contacto->apellido;
+                                                            } else {
+                                                                $nombreCompleto = $contacto->nombre;
+                                                            }
+                                                            $textoOk = str_replace('{nombreCompleto}', $nombreCompleto, $textoOk);
+                                                            if ($contacto->sexo == 'Masculino'){
+                                                                $oa = 'o';
+                                                            } else if ($contacto->sexo == 'Femenino'){
+                                                                $oa = 'a';
+                                                            } else {
+                                                                $oa = '';
+                                                            }
+                                                            $textoOk = str_replace('{o/a}', $oa, $textoOk);
 
-                                                                        /*IMPLEMENTAR PONER MI FIRMA*/
-                                                                        $textoOk = str_replace('{miNombre}', '', $textoOk);
-                                                                    ?>
-                                                                    <a href="https://wa.me/598{{ $contacto->cel }}?text={{ $textoOk }}" class="btn btn-success btn-icon-split">
-                                                                        <span class="icon text-white-50">
-                                                                            <i class="fas fa-arrow-right"></i>
-                                                                        </span>
-                                                                        <span class="text">Enviar WhatsApp</span>
-                                                                    </a>
-                                                                @endif
-                                                            </div>
-                                                        </div>
+                                                            /*IMPLEMENTAR PONER MI FIRMA*/
+                                                            $textoOk = str_replace('{miNombre}', '', $textoOk);
+                                                        ?>
+                                                        <a href="https://wa.me/598{{ $contacto->cel }}?text={{ $textoOk }}" class="btn btn-success btn-icon-split">
+                                                            <span class="icon text-white-50">
+                                                                <i class="fas fa-comment"></i>
+                                                            </span>
+                                                            <span class="text">Enviar Wpp</span>
+                                                        </a>
                                                     @endif
 
 
