@@ -155,7 +155,11 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    @if (!$contacto->lista_negra && $comunicacion->activa)
+                                                    @if (isset($comunicacionContactosMap[$contacto->id]))
+                                                        Respuesta: {{ $comunicacionContactosMap[$contacto->id]->respuesta_resumida }}
+                                                        <button>Valorar</button>
+                                                        <button>Modificar resp</button>
+                                                    @elseif (!$contacto->lista_negra && $comunicacion->activa)
                                                         <?php
                                                             $textoOk = $comunicacion->texto;
                                                             $textoOk = str_replace('{tratamiento}', $contacto->tratamiento, $textoOk);
@@ -178,7 +182,7 @@
                                                             /*IMPLEMENTAR PONER MI FIRMA*/
                                                             $textoOk = str_replace('{miNombre}', '', $textoOk);
                                                         ?>
-                                                        <a href="https://wa.me/598{{ $contacto->cel }}?text={{ $textoOk }}" class="btn btn-success btn-icon-split">
+                                                        <a href="https://wa.me/598{{ $contacto->cel }}?text={{ $textoOk }}" target="_blank" class="btn btn-success btn-icon-split">
                                                             <span class="icon text-white-50">
                                                                 <i class="fas fa-comment"></i>
                                                             </span>

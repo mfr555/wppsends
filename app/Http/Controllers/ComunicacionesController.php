@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comunicacion;
-use App\Models\Tematica;
+use App\Models\ComunicacionContacto;
 use App\Models\Contacto;
+use App\Models\Tematica;
 use Carbon\Carbon;
 
 class ComunicacionesController extends Controller
@@ -31,12 +32,23 @@ class ComunicacionesController extends Controller
 
     public function showOne(Request $request){
         $request->validate(['id' => 'required|exists:comunicacions']);
-        $com = Comunicacion::where('id',$request->id)->get()->first();
+        $com = Comunicacion::where('id', $request->id)->get()->first();
         $contactos = Contacto::get();
+
+        // Obtener las relaciones ComunicacionContacto para todos los contactos
+        $comunicacionContactos = ComunicacionContacto::whereIn('contacto_id', $contactos->pluck('id'))->where('comunicacion_id', $com->id)->get();
+
+        // Organizar las relaciones en un array asociativo por contacto_id
+        $comunicacionContactosMap = [];
+        foreach ($comunicacionContactos as $comunicacionContacto) {
+            $comunicacionContactosMap[$comunicacionContacto->contacto_id] = $comunicacionContacto;
+        }
 
         return view('base-de-datos.contactar',[
                             'comunicacion' => $com,
                             'contactos' => $contactos,
+                            'comunicacionContactos' => $comunicacionContactos,
+                            'comunicacionContactosMap' => $comunicacionContactosMap,
                         ]);
     }
 

@@ -40,6 +40,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
     Route::post('/comunicaciones-editar', 'ComunicacionesController@edit');
     Route::post('/finalizar-comunicacion', 'ComunicacionesController@finalizar');
 
+    //Route::post('/actualizar-estado/{mensaje}', 'MensajeController@actualizarEstado')->name('mensaje.actualizar.estado');
 
     Route::post('/agregar-tematica', 'TematicasController@store')->name('agregar-tematica');
 

@@ -35,16 +35,10 @@ class Contacto extends Model
         return $this->hasMany(Prefencia::class, 'preferencia_id');
     }
 
-    /**
-     * Devuelve la lista de ComunicacionContacto asociada al Contacto
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function getListaComunicacionContacto(): BelongsToMany
+    public function contactoComunicaciones(): HasMany
     {
-        return $this->belongsToMany(ComunicacionContacto::class);
+        return $this->hasMany(ComunicacionContacto::class, 'contacto_id');
     }
-
 
 
 }
