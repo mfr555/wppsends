@@ -55,7 +55,7 @@
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                 @auth
-                    Matías Rodriguez
+                    Mi sesión
                 @else
                     Mi sesión
                 @endauth

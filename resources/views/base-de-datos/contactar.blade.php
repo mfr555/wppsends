@@ -100,6 +100,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>Envío</th>
                                             <th>Nombre</th>
                                             <th>Información</th>
                                             <th>Interacción</th>
@@ -107,6 +108,7 @@
                                     </thead>
                                     <tfoot>
                                         <tr>
+                                            <th>Envío</th>
                                             <th>Nombre</th>
                                             <th>Información</th>
                                             <th>Interacción</th>
@@ -115,7 +117,14 @@
                                     <tbody>
 
                                         @foreach ($contactos as $contacto)
-                                            <tr>
+                                            <tr id="fila{{$contacto->cel}}">
+                                                <td>
+                                                    <div id="estado{{$contacto->cel}}">
+                                                        @if (isset($comunicacionContactosMap[$contacto->id]))
+                                                            {{$comunicacionContactosMap[$contacto->id]->recepcion}}
+                                                        @endif
+                                                    </div>
+                                                </td>
                                                 <td>
                                                     {{ $contacto->tratamiento }}
                                                     {{ $contacto->nombre }}
@@ -156,10 +165,62 @@
                                                 </td>
                                                 <td>
                                                     @if (isset($comunicacionContactosMap[$contacto->id]))
-                                                        Respuesta: {{ $comunicacionContactosMap[$contacto->id]->respuesta_resumida }}
-                                                        <button>Valorar</button>
-                                                        <button>Modificar resp</button>
+                                                        @if ($comunicacionContactosMap[$contacto->id]->recepcion == 'Respondido')
+                                                            <b>Estado del mensaje: Respondido</b>
+                                                            Respuesta: {{ $comunicacionContactosMap[$contacto->id]->respuesta_resumida }}
+                                                            <br>
+                                                            Valoracion: {{ $comunicacionContactosMap[$contacto->id]->respuesta_valoracion }}
+                                                            <hr>
+                                                        @elseif ($comunicacionContactosMap[$contacto->id]->recepcion == 'Indeterminado')
+                                                            Resultado inmediato:
+                                                            <br>
+                                                            <a href="/comunicacion-contacto-actualizar?contacto_id={{$contacto->id}}&comunicacion_id={{$comunicacion->id}}&recepcion=Enviado"
+                                                            class="btn btn-success btn-icon-split">
+                                                                <span class="icon text-white-50">
+                                                                    <i class="fas fa-check"></i>
+                                                                </span>
+                                                                <span class="text">Enviado</span>
+                                                            </a>
+
+                                                            <a href="/comunicacion-contacto-delete?contacto_id={{$contacto->id}}&comunicacion_id={{$comunicacion->id}}"
+                                                            class="btn btn-warning btn-icon-split">
+                                                                <span class="icon text-white-50">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </span>
+                                                                <span class="text">Cancelado</span>
+                                                            </a>
+
+                                                            <a href="/comunicacion-contacto-actualizar?contacto_id={{$contacto->id}}&comunicacion_id={{$comunicacion->id}}&recepcion=Error"
+                                                            class="btn btn-danger btn-icon-split">
+                                                                <span class="icon text-white-50">
+                                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                                </span>
+                                                                <span class="text">Error al enviar</span>
+                                                            </a>
+
+
+                                                        @elseif ($comunicacionContactosMap[$contacto->id]->recepcion == 'Error')
+                                                            <b>Estado del mensaje: Error</b>
+                                                        @else
+                                                            <b>Estado del mensaje: {{ $comunicacionContactosMap[$contacto->id]->recepcion }}</b>
+                                                            <a href="#" class="btn btn-info btn-icon-split">
+                                                                <span class="icon text-white-50">
+                                                                    <i class="fas fa-pen"></i>
+                                                                </span>
+                                                                <span class="text">Editar resp.</span>
+                                                            </a>
+                                                        @endif
                                                     @elseif (!$contacto->lista_negra && $comunicacion->activa)
+
+                                                        <div id="enviarWpp{{ $contacto->cel }}">
+                                                            <a href="/comunicacion-contacto-nueva?contacto_id={{$contacto->id}}&comunicacion_id={{$comunicacion->id}}" class="btn btn-success btn-icon-split">
+                                                                <span class="icon text-white-50">
+                                                                    <i class="fas fa-comment"></i>
+                                                                </span>
+                                                                <span class="text">Enviar Wpp</span>
+                                                            </a>
+                                                        </div>
+
                                                         <?php
                                                             $textoOk = $comunicacion->texto;
                                                             $textoOk = str_replace('{tratamiento}', $contacto->tratamiento, $textoOk);
@@ -182,12 +243,20 @@
                                                             /*IMPLEMENTAR PONER MI FIRMA*/
                                                             $textoOk = str_replace('{miNombre}', '', $textoOk);
                                                         ?>
-                                                        <a href="https://wa.me/598{{ $contacto->cel }}?text={{ $textoOk }}" target="_blank" class="btn btn-success btn-icon-split">
-                                                            <span class="icon text-white-50">
-                                                                <i class="fas fa-comment"></i>
-                                                            </span>
-                                                            <span class="text">Enviar Wpp</span>
-                                                        </a>
+
+                                                        <script>
+                                                            document.getElementById("enviarWpp{{$contacto->cel}}").addEventListener("click", function() {
+                                                                // Abre el enlace en una nueva ventana o pestaña
+                                                                window.open('https://wa.me/598{{$contacto->cel}}?text={{$textoOk}}', '_blank');
+
+                                                                // Modificar elementos para que marque el envío
+                                                                document.getElementById("estado{{$contacto->cel}}").innerHTML = "Envío a confirmar";
+                                                                document.getElementById("enviarWpp{{$contacto->cel}}").innerHTML = "Envío a confirmar";
+
+                                                            });
+                                                        </script>
+
+
                                                     @endif
 
 
@@ -196,7 +265,7 @@
                                         @endforeach
 
                                         <!-- Ejemplo: Contacto al que aún NO se le envió un mensaje -->
-                                        <tr>
+                                        <!-- tr>
                                             <td>Pastora Blanca</td>
                                             <td><i class="fas fa-venus"></i></td>
                                             <td>
@@ -208,7 +277,7 @@
                                                         Origen: Pastores2023
                                                     </div>
                                                     <div class="col-3">
-                                                        <!-- Más Información y edición -->
+                                                        <Más Información y edición >
                                                         <button href="#" class="btn btn-info btn-circle btn-sm"
                                                         data-toggle="tooltip" data-placement="left" title="Más Información / Editar">
                                                             <i class="fas fa-info-circle"></i>
@@ -230,12 +299,11 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                        </tr>
+                                        </tr-->
 
-                                        <!-- Ejemplo: Contacto al que aún SI se le envió un mensaje -->
+                                        <!-- Ejemplo: Contacto al que aún SI se le envió un mensaje >
                                         <tr>
                                             <td>Génesis Santana</td>
-                                            <td><i class="fas fa-venus"></i></td>
                                             <td>
                                                 <div class="row">
                                                     <div class="col-9">
@@ -244,8 +312,8 @@
                                                         Preferencias: Se desconoce<br>
                                                         Origen: Jóvenes2022
                                                     </div>
-                                                    <div class="col-3">
-                                                        <!-- Más Información y edición -->
+                                                    <div class="col-3"-->
+                                                        <!-- Más Información y edición >
                                                         <button href="#" class="btn btn-info btn-circle btn-sm"
                                                         data-toggle="tooltip" data-placement="left" title="Más Información / Editar">
                                                             <i class="fas fa-info-circle"></i>
@@ -267,12 +335,11 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                        </tr>
+                                        </tr-->
 
-                                        <!-- Ejemplo: Contacto en lista negra -->
+                                        <!-- Ejemplo: Contacto en lista negra >
                                         <tr>
                                             <td>Diego Recarey</td>
-                                            <td><i class="fas fa-mars"></i></td>
                                             <td>
                                                 <div class="row">
                                                     <div class="col-9 text-danger">
@@ -281,7 +348,6 @@
                                                         Origen: Jóvenes2022
                                                     </div>
                                                     <div class="col-3">
-                                                        <!-- Más Información y edición -->
                                                         <button href="#" class="btn btn-info btn-circle btn-sm"
                                                         data-toggle="tooltip" data-placement="left" title="Más Información / Editar">
                                                             <i class="fas fa-info-circle"></i>
@@ -290,10 +356,10 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>
-                                                <!-- no se le puede enviar un mensaje -->
+                                            <td-->
+                                                <!-- no se le puede enviar un mensaje >
                                             </td>
-                                        </tr>
+                                        </tr-->
 
                                     </tbody>
                                 </table>
