@@ -43,6 +43,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
     Route::get('/comunicacion-contacto-nueva', 'ComunicacionContactoController@store');
     Route::get('/comunicacion-contacto-actualizar', 'ComunicacionContactoController@update');
     Route::get('/comunicacion-contacto-delete', 'ComunicacionContactoController@delete');
+    Route::get('/editar-respuesta', 'ComunicacionContactoController@show');
+    Route::post('/editar-respuesta', 'ComunicacionContactoController@updateResp')->name('editar-resp');
+    Route::get('/lista-negra', 'ComunicacionContactoController@updateBlacklist');
 
     Route::post('/agregar-tematica', 'TematicasController@store')->name('agregar-tematica');
 

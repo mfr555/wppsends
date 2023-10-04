@@ -203,13 +203,15 @@
                                                             <b>Estado del mensaje: Error</b>
                                                         @else
                                                             <b>Estado del mensaje: {{ $comunicacionContactosMap[$contacto->id]->recepcion }}</b>
-                                                            <a href="#" class="btn btn-info btn-icon-split">
-                                                                <span class="icon text-white-50">
-                                                                    <i class="fas fa-pen"></i>
-                                                                </span>
-                                                                <span class="text">Editar resp.</span>
-                                                            </a>
                                                         @endif
+
+                                                        <a href="/editar-respuesta?contacto_id={{$contacto->id}}&comunicacion_id={{$comunicacion->id}}" class="btn btn-info btn-icon-split">
+                                                            <span class="icon text-white-50">
+                                                                <i class="fas fa-pen"></i>
+                                                            </span>
+                                                            <span class="text">Ver o editar respuesta</span>
+                                                        </a>
+
                                                     @elseif (!$contacto->lista_negra && $comunicacion->activa)
 
                                                         <div id="enviarWpp{{ $contacto->cel }}">
