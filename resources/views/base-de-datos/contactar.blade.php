@@ -134,21 +134,23 @@
                                                     @elseif ($contacto->sexo == 'Femenino')
                                                         <i class="fas fa-venus"></i>
                                                     @endif
+                                                    <div class="bg-note m-1 rounded">{{ $contacto->origen }}</div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex justify-content-between">
                                                         <div class="d-inline-flex p-2 {{ ($contacto->lista_negra ? 'text-danger' : '') }}">
                                                             <div class="row">
                                                                 <div class="col-auto">
-                                                                    Origen: {{ $contacto->origen_id }}
-                                                                    <br>
                                                                     <span class="font-weight-bold font-italic fondo-gris-suave" >
                                                                         "{{ $contacto->comentarios }}"
                                                                     </span>
                                                                     <br>
                                                                     Cel: {{ $contacto->cel }}
                                                                     <br>
-                                                                    Estado: {{ ($contacto->lista_negra ? 'Lista negra' : 'Ok') }}
+                                                                     Estado: {{ ($contacto->lista_negra ? 'Lista negra' : 'Ok') }}
+                                                                    @if (isset($contacto->depatamento_id))
+                                                                        <div>{{ $contacto->depatamento }}</div>
+                                                                    @endif
                                                                 </div>
                                                             </div>
 

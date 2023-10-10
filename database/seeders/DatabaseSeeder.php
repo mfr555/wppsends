@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             TematicasSeeder::class,
             ComunicacionsSeeder::class,
             OrigenSeeder::class,
+            OrigenSeeder2::class,
             ContactoSeeder::class,
             ComunicacionContactoSeeder::Class,
         ]);

@@ -7118,6 +7118,10 @@ button.bg-dark:hover {
     background-color: transparent !important
 }
 
+.bg-note {
+    background-color: #fbe6b1 !important
+}
+
 .border {
     border: 1px solid #e3e6f0 !important
 }
@@ -11656,7 +11660,7 @@ a:focus {
     text-decoration: none;
     font-size: 1rem;
     font-weight: 800;
-    padding: 1rem 1rem;
+    padding: 0.5rem 0.2rem;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: .05rem;

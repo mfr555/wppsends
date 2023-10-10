@@ -39,23 +39,23 @@
                                 <input type="text" id="apellido" name="apellido" class="form-control" placeholder="Apellido">
                             </div>
                         </div>
-                        <!--div class="row">
+                        <div class="row">
                             <div class="col-auto">
                                 <label>Sexo</label>
                             </div>
                             <div class="col-auto">
                                 <div class="form-group">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sexoM" name="sexo" value="masculino" required>
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sexoM" name="sexo" value="Masculino" required>
                                         <label class="form-check-label" for="masculino">Masculino</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sexoF" name="sexo" value="femenino">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="sexoF" name="sexo" value="Femenino">
                                         <label class="form-check-label" for="femenino">Femenino</label>
                                     </div>
                                 </div>
                             </div>
-                        </div-->
+                        </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="cel" name="cel" required placeholder="Celular">
                         </div>
@@ -68,27 +68,11 @@
                                     <label for="departamento">Departamento</label>
                                 </div>
                                 <div class="col">
-                                    <select class="custom-select" id="departamento" name="departamento">
+                                    <select class="custom-select" id="departamento" name="departamento_id">
                                         <option selected></option>
-                                        <option value="Artigas">Artigas</option>
-                                        <option value="Canelones">Canelones</option>
-                                        <option value="Cerro Largo">Cerro Largo</option>
-                                        <option value="Colonia">Colonia</option>
-                                        <option value="Durazno">Durazno</option>
-                                        <option value="Flores">Flores</option>
-                                        <option value="Florida">Florida</option>
-                                        <option value="Lavalleja">Lavalleja</option>
-                                        <option value="Maldonado">Maldonado</option>
-                                        <option value="Montevideo">Montevideo</option>
-                                        <option value="Paysandú">Paysandú</option>
-                                        <option value="Río Negro">Río Negro</option>
-                                        <option value="Rivera">Rivera</option>
-                                        <option value="Rocha">Rocha</option>
-                                        <option value="Salto">Salto</option>
-                                        <option value="San José">San José</option>
-                                        <option value="Soriano">Soriano</option>
-                                        <option value="Tacuarembó">Tacuarembó</option>
-                                        <option value="Treinta y Tres">Treinta y Tres</option>
+                                        @foreach ($deptos as $departamento)
+                                            <option value="{{ $departamento->id }}">{{ $departamento->nombre }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -99,8 +83,16 @@
                                     <label for="origen">Origen del contacto</label>
                                 </div>
                                 <div class="col">
-                                    <select class="custom-select" id="origen" name="origen">
-                                        <option selected></option>
+                                    <select class="custom-select" id="origen" name="origen_id" required>
+                                        @foreach ($origenes as $origen)
+                                            <option value="{{ $origen->id }}">
+                                                @if ($origen->user_id == Auth::user()->id)
+                                                    <option value="{{ $origenes->id }}" selected>Mis contactos</option>
+                                                @else
+                                                <option value="{{ $origenes->id }}">{{ $origen->nombre }}</option>
+                                                @endif
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
