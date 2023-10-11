@@ -134,7 +134,7 @@
                                                     @elseif ($contacto->sexo == 'Femenino')
                                                         <i class="fas fa-venus"></i>
                                                     @endif
-                                                    <div class="bg-note m-1 rounded">{{ $contacto->origen }}</div>
+                                                <div class="bg-note p-1 rounded">{{ $contacto->origen->nombre }}</div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex justify-content-between">
@@ -260,110 +260,11 @@
                                                             });
                                                         </script>
 
-
                                                     @endif
-
 
                                                 </td>
                                             </tr>
                                         @endforeach
-
-                                        <!-- Ejemplo: Contacto al que aún NO se le envió un mensaje -->
-                                        <!-- tr>
-                                            <td>Pastora Blanca</td>
-                                            <td><i class="fas fa-venus"></i></td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-9">
-                                                        Ult. com. 22/9/23 <br>
-                                                        Estado: Ok <br>
-                                                        Preferencias: Cristiana <br>
-                                                        Origen: Pastores2023
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <Más Información y edición >
-                                                        <button href="#" class="btn btn-info btn-circle btn-sm"
-                                                        data-toggle="tooltip" data-placement="left" title="Más Información / Editar">
-                                                            <i class="fas fa-info-circle"></i>
-                                                        </button>
-
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="card bg-secondary text-white shadow">
-                                                    <div class="card-body">
-                                                        No enviado <br>
-                                                        <a href="#" class="btn btn-success btn-icon-split">
-                                                            <span class="icon text-white-50">
-                                                                <i class="fas fa-arrow-right"></i>
-                                                            </span>
-                                                            <span class="text">Enviar WhatsApp</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr-->
-
-                                        <!-- Ejemplo: Contacto al que aún SI se le envió un mensaje >
-                                        <tr>
-                                            <td>Génesis Santana</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-9">
-                                                        Ult. com. 12/9/23 <br>
-                                                        Estado: Ok <br>
-                                                        Preferencias: Se desconoce<br>
-                                                        Origen: Jóvenes2022
-                                                    </div>
-                                                    <div class="col-3"-->
-                                                        <!-- Más Información y edición >
-                                                        <button href="#" class="btn btn-info btn-circle btn-sm"
-                                                        data-toggle="tooltip" data-placement="left" title="Más Información / Editar">
-                                                            <i class="fas fa-info-circle"></i>
-                                                        </button>
-
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="card bg-warning text-white shadow">
-                                                    <div class="card-body">
-                                                        Enviado <br>
-                                                        <a href="#" class="btn btn-info btn-icon-split">
-                                                            <span class="icon text-white-50">
-                                                                <i class="fas fa-pen"></i>
-                                                            </span>
-                                                            <span class="text">Editar respuesta</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr-->
-
-                                        <!-- Ejemplo: Contacto en lista negra >
-                                        <tr>
-                                            <td>Diego Recarey</td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col-9 text-danger">
-                                                        Ult. com. 12/9/23 <br>
-                                                        Estado: Lista negra <br>
-                                                        Origen: Jóvenes2022
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <button href="#" class="btn btn-info btn-circle btn-sm"
-                                                        data-toggle="tooltip" data-placement="left" title="Más Información / Editar">
-                                                            <i class="fas fa-info-circle"></i>
-                                                        </button>
-
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td-->
-                                                <!-- no se le puede enviar un mensaje >
-                                            </td>
-                                        </tr-->
 
                                     </tbody>
                                 </table>

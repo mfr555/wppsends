@@ -16,7 +16,7 @@ class ContactosController extends Controller
         $contactos = Contacto::get();
         $origenes = Origen::get();
         $deptos = Departamento::get();
-        return view('base-de-datos.contactar',
+        return view('base-de-datos.administrar-contactos',
                         ['contactos' => $contactos,
                         'origenes' => $origenes,
                         'deptos' => $deptos,

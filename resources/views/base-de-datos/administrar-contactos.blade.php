@@ -85,13 +85,11 @@
                                 <div class="col">
                                     <select class="custom-select" id="origen" name="origen_id" required>
                                         @foreach ($origenes as $origen)
-                                            <option value="{{ $origen->id }}">
-                                                @if ($origen->user_id == Auth::user()->id)
-                                                    <option value="{{ $origenes->id }}" selected>Mis contactos</option>
-                                                @else
-                                                <option value="{{ $origenes->id }}">{{ $origen->nombre }}</option>
-                                                @endif
-                                            </option>
+                                            @if ($origen->user_id == Auth::user()->id)
+                                                <option value="{{ $origen->id }}" selected>Mis contactos</option>
+                                            @else
+                                            <option value="{{ $origen->id }}">{{ $origen->nombre }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>

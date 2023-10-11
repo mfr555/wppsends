@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use App\Models\ComunicacionContacto;
 use App\Models\Departamento;
 use App\Models\Origen;
@@ -44,25 +43,24 @@ class Contacto extends Model
     }
 
     /**
-     * Get the origen associated with the Contacto
+     * Get the origen that owns the Contacto
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function origen(): HasOne
+    public function origen(): BelongsTo
     {
-        return $this->hasOne(Origen::class);
+        return $this->belongsTo(Origen::class);
     }
+
 
     /**
-     * Get the departamento associated with the Contacto
+     * Get the departamento that owns the Contacto
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function departamento(): HasOne
+    public function departamento(): BelongsTo
     {
-        return $this->departamento(Departamento::class);
+        return $this->belongsTo(Departamento::class);
     }
-
-
 
 }
