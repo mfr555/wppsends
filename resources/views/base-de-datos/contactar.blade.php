@@ -134,7 +134,9 @@
                                                     @elseif ($contacto->sexo == 'Femenino')
                                                         <i class="fas fa-venus"></i>
                                                     @endif
-                                                <div class="bg-note p-1 rounded">{{ $contacto->origen->nombre }}</div>
+                                                    @isset($contacto->origen_id)
+                                                        <div class="bg-note p-1 rounded">{{ $contacto->origen->nombre }}</div>
+                                                    @endisset
                                                 </td>
                                                 <td>
                                                     <div class="d-flex justify-content-between">
