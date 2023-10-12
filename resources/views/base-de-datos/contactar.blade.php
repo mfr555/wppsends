@@ -5,7 +5,7 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800 text-weight-bold">
-        Base de datos
+        Contactar
     </h1>
     <!--a href="#" class="d-none d-sm-inline-block btn btn-success shadow-sm"><i
             class="fas fa-plus fa-sm text-white-50"></i>
@@ -14,7 +14,7 @@
 </div>
 
 <section id="contactar">
-    <h2 class="h2 mb-2">Comunicación: {{ $comunicacion->nombre }}</h2>
+    <h5 class="mb-2 text-gray-600 text-weight-bold">{{ $comunicacion->nombre }}</h2>
 
     <div class="row">
         <div class="col-12 mb-4">
@@ -159,10 +159,10 @@
                                                         </div>
                                                         <div class="d-inline-flex p-2">
                                                             <!-- Más Información y edición -->
-                                                            <button href="#" class="btn btn-info btn-circle btn-sm"
+                                                            <a href="/contacto-editar?id={{ $contacto->id }}" class="btn btn-info btn-circle btn-sm"
                                                             data-toggle="tooltip" data-placement="left" title="Más Información / Editar">
-                                                                <i class="fas fa-info-circle"></i>
-                                                            </button>
+                                                                <i class="fas fa-pen"></i>
+                                                            </a>
 
                                                         </div>
                                                     </div>

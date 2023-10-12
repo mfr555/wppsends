@@ -39,7 +39,7 @@
                                 <input type="text" id="apellido" name="apellido" class="form-control" placeholder="Apellido">
                             </div>
                         </div>
-                        <div class="row">
+                        <!--div class="row">
                             <div class="col-auto">
                                 <label>Sexo</label>
                             </div>
@@ -55,7 +55,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div-->
                         <div class="form-group">
                             <input type="text" class="form-control" id="cel" name="cel" required placeholder="Celular">
                         </div>
@@ -74,6 +74,14 @@
                                             <option value="{{ $departamento->id }}">{{ $departamento->nombre }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <textarea id="comentarios" name="comentarios" rows="3" class="form-control"
+                                     placeholder="Comentarios adicionales sobre el contacto"></textarea>
                                 </div>
                             </div>
                         </div>

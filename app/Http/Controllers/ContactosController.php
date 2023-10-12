@@ -16,11 +16,27 @@ class ContactosController extends Controller
         $contactos = Contacto::get();
         $origenes = Origen::get();
         $deptos = Departamento::get();
-        return view('base-de-datos.administrar-contactos',
+        return view('base-de-datos.contacto-nuevo',
                         ['contactos' => $contactos,
                         'origenes' => $origenes,
                         'deptos' => $deptos,
                         ]);
+    }
+
+    public function updatePage(Request $request){
+        $validated = $request->validate(['id' => 'required|exists:contactos,id']);
+        $contacto = Contacto::where('id', $request->id)->get()->first();
+        $origenes = Origen::get();
+        $deptos = Departamento::get();
+        if (!$validated){
+            return redirect('/');
+        } else {
+            return view('base-de-datos.contacto-editar',
+                            ['contacto' => $contacto,
+                            'origenes' => $origenes,
+                            'deptos' => $deptos,
+                            ]);
+        }
     }
 
     public function store(Request $request){
@@ -29,10 +45,12 @@ class ContactosController extends Controller
             'nombre' => 'required|min:3',
             'cel' => 'required|digits:8|unique:contactos',
             'origen_id' => 'required|exists:origens,id',
-            'departamento_id' => 'exists:departamentos,id',
-            'sexo' => ['required',
-                        Rule::in(['Masculino', 'Femenino'])],
+            'sexo' => [Rule::in(['Masculino', 'Femenino'])],
         ]);
+        if(isset($request->departamento_id)){
+            $request->validate(['departamento_id' => 'exists:departamentos,id', ]);
+        }
+
 
         $contacto = new Contacto;
 
@@ -47,38 +65,49 @@ class ContactosController extends Controller
         $contacto->tratamiento = $request->tratamiento;
         $contacto->nombre = $request->nombre;
         $contacto->apellido = $request->apellido;
-        $contacto->sexo = $request->sexo;
+        //$contacto->sexo = $request->sexo;
         $contacto->cel = $request->cel;
-        $contacto->departamento_id = $request->departamento_id;
+        if(isset( $request->departamento_id)){
+            $contacto->departamento_id = $request->apelldepartamento_idido;
+        }
         $contacto->origen_id = $request->origen_id;
+        $contacto->comentarios = $request->comentarios;
 
         $contacto->save();
         return redirect()->route('contactos')->with('success', 'Contacto agregado correctamente');
     }
 
-    /*public function update(Request $request){
+    public function update(Request $request){
         $request->validate([
+            'id' => 'required|exists:contactos,id',
             'tratamiento' => 'max:8',
             'nombre' => 'required|min:3',
-            'cel' => 'required|digits:8|unique:contactos',
+            'cel' => 'required|digits:8',
+            'origen_id' => 'required|exists:origens,id',
+            'sexo' => [Rule::in(['Masculino', 'Femenino'])],
         ]);
-
-        $contacto = Contacto::where('cel', $request->cel)->get();
-
-        if ($contacto != null){
-            $contacto->tratamiento = $request->tratamiento;
-            $contacto->nombre = $request->nombre;
-            $contacto->apellido = $request->apellido;
-            //$contacto->sexo = $request->sexo;
-            $contacto->cel = $request->cel;
-            //$contacto->departamento_id = $request->departamento_id;
-            //$contacto->origen_id = $request->origen_id;
-
-            $contacto->save();
-            return redirect()->route('contactos')->with('success', 'Los datos del contacto fueron actualizados');
+        if(isset($request->departamento_id)){
+            $request->validate(['departamento_id' => 'exists:departamentos,id', ]);
         }
 
-    }*/
+        $contacto = Contacto::where('id', $request->id)->get()->first();
+        $contacto->tratamiento = $request->tratamiento;
+        $contacto->nombre = $request->nombre;
+        if(isset($request->apellido)){
+            $contacto->apellido = $request->apellido;
+        }
+        //$contacto->sexo = $request->sexo;
+        $contacto->cel = $request->cel;
+        if(isset($request->departamento_id)){
+            $contacto->departamento_id = $request->apelldepartamento_idido;
+        }
+        $contacto->origen_id = $request->origen_id;
+        $contacto->lista_negra = ($request->lista_negra==1 ? true : false);
+        $contacto->update();
+        return redirect('contacto-editar?id='.$request->id)
+                    ->with('success', 'Los datos del contacto fueron actualizados');
+
+    }
 
 }
 

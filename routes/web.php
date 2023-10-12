@@ -30,6 +30,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
      */
     Route::get('/contactos', 'ContactosController@showPage');
     Route::post('/contactos', 'ContactosController@store')->name('contactos');
+    Route::get('/contacto-editar', 'ContactosController@updatePage');
+    Route::post('/contacto-editar', 'ContactosController@update')->name('contacto-editar');
 
     Route::get('/comunicaciones', 'ComunicacionesController@showAll');
     Route::post('/comunicaciones', 'ComunicacionesController@store')->name('comunicaciones');
