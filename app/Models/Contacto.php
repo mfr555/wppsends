@@ -34,7 +34,7 @@ class Contacto extends Model
 
     public function getPreferencias(): HasMany
     {
-        return $this->hasMany(Prefencia::class, 'preferencia_id');
+        return $this->hasMany(Preferencia::class, 'preferencia_id');
     }
 
     public function contactoComunicaciones(): HasMany
@@ -61,6 +61,40 @@ class Contacto extends Model
     public function departamento(): BelongsTo
     {
         return $this->belongsTo(Departamento::class);
+    }
+
+    /**
+     * Devuelve la compatibilidad del contacto con un conjunto de hasta 3 temáticas
+     * considerando sus preferencias temáticas
+     *
+     * @return boolean
+     */
+    public function compatible($tematica1_id, $tematica2_id, $tematica3_id){
+        $comp = false;
+        if (!$comp){
+            $pref1 = Preferencia::where(['contacto_id' => $this->id,
+                                        'tematica_id' => $tematica1_id ])->first();
+            if (isset($pref1)){
+                $comp = ($pref1->aceptacion > 0);
+            }
+        }
+
+        if (!$comp && isset($tematica2_id)){
+            $pref2 = Preferencia::where(['contacto_id' => $this->id,
+                                        'tematica_id' => $tematica2_id ])->first();
+            if (isset($pref2)){
+                $comp = ($pref2->aceptacion > 0);
+            }
+        }
+
+        if (!$comp && isset($tematica3_id)){
+            $pref3 = Preferencia::where(['contacto_id' => $this->id,
+                                        'tematica_id' => $tematica3_id ])->first();
+            if (isset($pref3)){
+                $comp = ($pref3->aceptacion > 0);
+            }
+        }
+        return $comp;
     }
 
 }

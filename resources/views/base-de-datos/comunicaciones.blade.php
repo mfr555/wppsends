@@ -180,7 +180,7 @@
                                                         </button>
                                                     </form>
                                                 @endif
-                                                <a class="btn btn-primary" href="comunicaciones-abrir?id={{ $oneCom->id }}">
+                                                <a class="btn btn-primary" href="comunicaciones-abrir?id={{ $oneCom->id }}&filt=segment_pend">
                                                     Abrir
                                                 </a>
                                             </div>

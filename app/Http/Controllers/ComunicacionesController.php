@@ -34,6 +34,11 @@ class ComunicacionesController extends Controller
         $request->validate(['id' => 'required|exists:comunicacions']);
         $com = Comunicacion::where('id', $request->id)->get()->first();
         $contactos = Contacto::get();
+        if (!isset($request->filt)) {
+            $filtro = "n";
+        } else {
+            $filtro = $request->filt;
+        }
 
         // Obtener las relaciones ComunicacionContacto para todos los contactos
         $comunicacionContactos = ComunicacionContacto::whereIn('contacto_id', $contactos->pluck('id'))->where('comunicacion_id', $com->id)->get();
@@ -49,6 +54,7 @@ class ComunicacionesController extends Controller
                             'contactos' => $contactos,
                             'comunicacionContactos' => $comunicacionContactos,
                             'comunicacionContactosMap' => $comunicacionContactosMap,
+                            'filtro' => $filtro,
                         ]);
     }
 
