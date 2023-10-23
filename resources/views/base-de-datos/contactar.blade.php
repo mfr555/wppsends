@@ -162,6 +162,12 @@
                                                             </div>
                                                         </td>
                                                         <td>
+                                                            @php
+                                                                $botonesParaEstadoIntermedio = view('base-de-datos.partials.botones-para-estado-intermedio',
+                                                                                                            ['contacto' => $contacto, 'comunicacion' => $comunicacion]);
+                                                                $botonesParaEstadoIntermedioEncoded = json_encode($botonesParaEstadoIntermedio);
+                                                            @endphp
+
                                                             @if (isset($comunicacionContactosMap[$contacto->id]))
                                                                 @if ($comunicacionContactosMap[$contacto->id]->recepcion == 'Respondido')
                                                                     <b>Estado del mensaje: Respondido</b>
@@ -172,31 +178,9 @@
                                                                     {{ $comunicacionContactosMap[$contacto->id]->respuesta_valoracion }}
                                                                     <hr>
                                                                 @elseif ($comunicacionContactosMap[$contacto->id]->recepcion == 'Indeterminado')
-                                                                    Resultado inmediato:
-                                                                    <br>
-                                                                    <a href="/comunicacion-contacto-actualizar?contacto_id={{ $contacto->id }}&comunicacion_id={{ $comunicacion->id }}&recepcion=Enviado"
-                                                                        class="btn btn-success btn-icon-split">
-                                                                        <span class="icon text-white-50">
-                                                                            <i class="fas fa-check"></i>
-                                                                        </span>
-                                                                        <span class="text">Enviado</span>
-                                                                    </a>
 
-                                                                    <a href="/comunicacion-contacto-delete?contacto_id={{ $contacto->id }}&comunicacion_id={{ $comunicacion->id }}"
-                                                                        class="btn btn-warning btn-icon-split">
-                                                                        <span class="icon text-white-50">
-                                                                            <i class="fas fa-trash"></i>
-                                                                        </span>
-                                                                        <span class="text">Cancelado</span>
-                                                                    </a>
+                                                                    {{ $botonesParaEstadoIntermedio }}
 
-                                                                    <a href="/comunicacion-contacto-actualizar?contacto_id={{ $contacto->id }}&comunicacion_id={{ $comunicacion->id }}&recepcion=Error"
-                                                                        class="btn btn-danger btn-icon-split">
-                                                                        <span class="icon text-white-50">
-                                                                            <i class="fas fa-exclamation-triangle"></i>
-                                                                        </span>
-                                                                        <span class="text">Error al enviar</span>
-                                                                    </a>
                                                                 @elseif ($comunicacionContactosMap[$contacto->id]->recepcion == 'Error')
                                                                     <b>Estado del mensaje: Error</b>
                                                                 @else
@@ -223,39 +207,57 @@
                                                                 </div>
 
                                                                 <?php
-                                                                $textoOk = $comunicacion->texto;
-                                                                $textoOk = str_replace('{tratamiento}', $contacto->tratamiento, $textoOk);
-                                                                $textoOk = str_replace('{nombre}', $contacto->nombre, $textoOk);
-                                                                if ($contacto->apellido != '') {
-                                                                    $nombreCompleto = $contacto->nombre . ' ' . $contacto->apellido;
-                                                                } else {
-                                                                    $nombreCompleto = $contacto->nombre;
-                                                                }
-                                                                $textoOk = str_replace('{nombreCompleto}', $nombreCompleto, $textoOk);
-                                                                if ($contacto->sexo == 'Masculino') {
-                                                                    $oa = 'o';
-                                                                } elseif ($contacto->sexo == 'Femenino') {
-                                                                    $oa = 'a';
-                                                                } else {
-                                                                    $oa = '';
-                                                                }
-                                                                $textoOk = str_replace('{o/a}', $oa, $textoOk);
+                                                                    $textoOk = $comunicacion->texto;
+                                                                    $textoOk = str_replace('{tratamiento}', $contacto->tratamiento, $textoOk);
+                                                                    $textoOk = str_replace('{nombre}', $contacto->nombre, $textoOk);
+                                                                    if ($contacto->apellido != '') {
+                                                                        $nombreCompleto = $contacto->nombre . ' ' . $contacto->apellido;
+                                                                    } else {
+                                                                        $nombreCompleto = $contacto->nombre;
+                                                                    }
+                                                                    $textoOk = str_replace('{nombreCompleto}', $nombreCompleto, $textoOk);
+                                                                    if ($contacto->sexo == 'Masculino') {
+                                                                        $oa = 'o';
+                                                                    } elseif ($contacto->sexo == 'Femenino') {
+                                                                        $oa = 'a';
+                                                                    } else {
+                                                                        $oa = '';
+                                                                    }
+                                                                    $textoOk = str_replace('{o/a}', $oa, $textoOk);
 
-                                                                /*IMPLEMENTAR PONER MI FIRMA*/
-                                                                $textoOk = str_replace('{miNombre}', '', $textoOk);
+                                                                    /*IMPLEMENTAR PONER MI FIRMA*/
+                                                                    $textoOk = str_replace('{miNombre}', '', $textoOk);
                                                                 ?>
 
                                                                 <script>
+                                                                    var botonesParaEstadoIntermedio = {{ html_entity_decode($botonesParaEstadoIntermedioEncoded) }};
                                                                     document.getElementById("enviarWpp{{ $contacto->cel }}").addEventListener("click", function() {
                                                                         // Abre el enlace en una nueva ventana o pestaña
                                                                         window.open('https://wa.me/598{{ $contacto->cel }}?text={{ $textoOk }}', '_blank');
-                                                                        window.open('/comunicacion-contacto-nueva?contacto_id={{ $contacto->id }}&comunicacion_id={{ $comunicacion->id }}', '_blank');
 
                                                                         // Modificar elementos para que marque el envío
-                                                                        document.getElementById("estado{{ $contacto->cel }}").innerHTML = "Envío a confirmar";
-                                                                        document.getElementById("enviarWpp{{ $contacto->cel }}").innerHTML = "Envío a confirmar";
+                                                                        document.getElementById("estado{{ $contacto->cel }}").innerHTML = "Indeterminado";
+                                                                        document.getElementById("enviarWpp{{ $contacto->cel }}").innerHTML = "Actualizar y confirmar envío";//botonesParaEstadoIntermedio;
 
+                                                                        //Actualizar crear comunicación-contacto en la base de datos
+                                                                        $.ajax({
+                                                                            type: 'GET',
+                                                                            url: '/comunicacion-contacto-nueva',
+                                                                            data: {
+                                                                                    contacto_id: {{ $contacto->id }},
+                                                                                    comunicacion_id: {{ $comunicacion->id }}
+                                                                                },
+                                                                            success: function (data) {
+                                                                                //var reporteElement = $('#reporte');
+                                                                                //reporteElement.html('Linea #' + idLinea + ' actualizada ')
+                                                                            },
+                                                                            error: function (error) {
+                                                                                //console.log(error);
+                                                                            }
+                                                                        });
                                                                     });
+
+
                                                                 </script>
                                                             @endif
 
