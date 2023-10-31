@@ -346,6 +346,31 @@
                     </div>
                 </div>
 
+                <!-- Acciones masivas -->
+                <div id="acciones_masivas" class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            Acciones masivas
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+
+                                <form action="/confirmar-mensajes/{{ $comunicacion->id }}" method="POST" >
+                                    @csrf
+                                    <button class="btn btn-warning btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </span>
+                                        <span class="text">Confirmar envío de todos los mensajes indeterminados</span>
+                                    </button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
 
             </div>
         </div>

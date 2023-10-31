@@ -126,4 +126,18 @@ class ComunicacionContactoController extends Controller
                         ->with('success','Estado de la comunicacion eliminado');
 
     }
+
+    /**
+     * Confirma los mensajes en estado indeterminado para cierta comunicación
+     */
+    public function confirmarMensajes($comunicacion_id){
+        $cc = ComunicacionContacto::where(['comunicacion_id' => $comunicacion_id,
+                                            'recepcion' => 'Indeterminado'])
+                                    ->get();
+        foreach ($cc as $mensaje){
+            $mensaje->recepcion = 'Enviado';
+            $mensaje->save();
+        }
+        return back()->with('success', $cc->count() . ' Mensajes pasaron de estado Indeterminado a Enviado');
+    }
 }

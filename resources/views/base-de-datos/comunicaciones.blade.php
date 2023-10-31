@@ -8,7 +8,7 @@
     </h1>
 </div>
 
-<section id="panel-usuario">
+<section>
     <h2 class="h2 mb-2">Administrar campañas de comunicación</h2>
     <div class="row">
 
@@ -23,11 +23,11 @@
                     </p>
                     <form action="{{ route('comunicaciones') }}" method="POST">
                         @csrf
-                            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre">
+                            <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" required>
                             <div class="row">
                                 <div class="col-md-9 col-12">
                                     <label>Texto del mensaje:</label>
-                                    <textarea class="form-control" id="editor" name="texto" rows="10" cols="30"></textarea>
+                                    <textarea class="form-control" id="editor" name="texto" rows="10" cols="30" required></textarea>
                                 </div>
                                 <div class="col-md-3 col-12">
                                     <label>Variables:</label>
@@ -64,7 +64,7 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col">
-                                    <select class="custom-select" id="tematica1" name="tematica1">
+                                    <select class="custom-select" id="tematica1" name="tematica1" required>
                                         <option selected></option>
                                         @foreach ($tematicas as $unaTematica)
                                             <option value="{{ $unaTematica }}">{{ $unaTematica }}</option>
@@ -175,13 +175,16 @@
                                                     <form action="finalizar-comunicacion" method="POST">
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{$oneCom->id}}" >
-                                                        <button class="btn btn-danger mr-3">
+                                                        <button class="btn btn-danger m-1">
                                                             <i class="fas fa-trash"></i> Finalizar
                                                         </button>
                                                     </form>
                                                 @endif
-                                                <a class="btn btn-primary" href="comunicaciones-abrir?id={{ $oneCom->id }}&filt=segment_pend">
+                                                <a class="btn btn-primary m-1" href="comunicaciones-abrir?id={{ $oneCom->id }}&filt=segment_pend">
                                                     Abrir
+                                                </a>
+                                                <a class="btn btn-info m-1" href="reportes/comunicaciones/{{ $oneCom->id }}">
+                                                    Reporte
                                                 </a>
                                             </div>
 

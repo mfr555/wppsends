@@ -4,7 +4,7 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
             <div class="sidebar-brand">
-                <img src="img/logo/blanco.png" alt="Plan País logo" >
+                <img src="{{ asset('img/logo/blanco.png') }}" alt="Plan País logo" >
             </div>
         </a>
 
