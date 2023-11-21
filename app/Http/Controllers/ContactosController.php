@@ -7,6 +7,8 @@ use Illuminate\Validation\Rule;
 use App\Models\Contacto;
 use App\Models\Departamento;
 use App\Models\Origen;
+use App\Models\Preferencia;
+use App\Models\Tematica;
 
 class ContactosController extends Controller
 {
@@ -16,10 +18,12 @@ class ContactosController extends Controller
         $contactos = Contacto::get();
         $origenes = Origen::get();
         $deptos = Departamento::get();
+        $tematicas = Tematica::get();
         return view('base-de-datos.contacto-nuevo',
                         ['contactos' => $contactos,
                         'origenes' => $origenes,
                         'deptos' => $deptos,
+                        'tematicas' => $tematicas,
                         ]);
     }
 
@@ -47,10 +51,18 @@ class ContactosController extends Controller
             'origen_id' => 'required|exists:origens,id',
             'sexo' => [Rule::in(['Masculino', 'Femenino'])],
         ]);
+
         if(isset($request->departamento_id)){
             $request->validate(['departamento_id' => 'exists:departamentos,id', ]);
         }
 
+        $preferencias = $request->input('preferencias');
+        $preferencias = implode(',', $preferencias);
+        foreach ($preferencias as $preferencia){
+            $request->validate([
+                $preferencia => 'exists:tematicas,id',
+            ]);
+        }
 
         $contacto = new Contacto;
 
@@ -74,6 +86,15 @@ class ContactosController extends Controller
         $contacto->comentarios = $request->comentarios;
 
         $contacto->save();
+
+        foreach ($preferencias as $tematica_id){
+            $preferencia = new Preferencia;
+            $preferencia->contacto_id = $contacto->id;
+            $preferencia->tematica_id = $tematica_id;
+            $preferencia->aceptacion = 1;
+            $preferencia->save();
+        }
+
         return redirect()->route('contactos')->with('success', 'Contacto agregado correctamente');
     }
 
