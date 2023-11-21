@@ -89,6 +89,37 @@
                             <div class="row">
                                 <div class="col-auto">
                                     <label for="origen">Origen del contacto</label>
+
+                                    <button type="button" class="btn btn-secondary btn-circle btn-sm ml-2" data-toggle="modal" data-target="#modalAgregarOrigen" aria-describedby="Argegar una temática faltante">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+
+                                    <!-- Modal Agregar origen begin -->
+                                    <div class="modal fade" id="modalAgregarOrigen" tabindex="-1" role="dialog" aria-labelledby="modalAgregarOrigenLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Agregar Origen de contactos</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form action="agregar-origen" method="POST">
+                                                    @csrf
+                                                    <div class="modal-body">
+                                                        <input type="text" id="nombreTematica" name="nombreTematica" class="form-control"
+                                                            placeholder="Nombre del origen de contacto">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancaler</button>
+                                                        <button type="submit" class="btn btn-primary">Aceptar</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modal Agregar origen ends -->
+
                                 </div>
                                 <div class="col">
                                     <select class="custom-select" id="origen" name="origen_id" required>

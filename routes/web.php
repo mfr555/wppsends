@@ -69,6 +69,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::get('/lista-negra', 'ComunicacionContactoController@updateBlacklist');
 
         Route::post('/agregar-tematica', 'TematicasController@store')->name('agregar-tematica');
+        Route::post('/agregar-origen', 'OrigenController@store')->name('agregar-origen');
 
         /**
          * Logout Routes
