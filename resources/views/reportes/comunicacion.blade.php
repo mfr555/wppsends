@@ -20,7 +20,11 @@
                                 + $mensajes['recibidos']
                                 + $mensajes['respondidos'];
 
-                $porcent['respondidos'] = round( $mensajes['respondidos'] * 100 / $enviadosTotal );
+                if ($enviadosTotal != 0) {
+                    $porcent['respondidos'] = round( $mensajes['respondidos'] * 100 / $enviadosTotal );
+                } else {
+                    $porcent['respondidos'] = 0;
+                }
              @endphp
 
             <!-- Barras de progreso -->

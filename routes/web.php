@@ -41,9 +41,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
     Route::group(['middleware' => ['auth']], function() {
 
-        /**
-         * Base de datos Routes
-         */
+        //Usuarios
+        Route::prefix('user')->group(function() {
+            Route::get('{id}/show/', 'UserController@show')->name('user');
+            Route::get('{id}/edit/', 'UserController@edit')->name('user-edit');
+            Route::post('/{id}/update-password', 'UserController@updatePassword')->name('user-update-password');
+            Route::get('index', 'UserController@index')->name('user.index');
+        });
+
         Route::get('/contactos', 'ContactosController@showPage');
         Route::post('/contactos', 'ContactosController@store')->name('contactos');
         Route::get('/contacto-editar', 'ContactosController@updatePage');

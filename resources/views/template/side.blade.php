@@ -39,6 +39,14 @@
                 <span>Campañas de Wpp</span></a>
         </li>
 
+        @can('view', 'App\\Models\User')
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('user.index') }}">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Usuarios</span></a>
+            </li>
+        @endcan
+
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 
