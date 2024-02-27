@@ -49,6 +49,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
             Route::get('index', 'UserController@index')->name('user.index');
         });
 
+        //Listas
+        Route::prefix('listas')->group(function() {
+            Route::get('/', 'ListaController@index')->name('listas');
+        });
+
         Route::get('/contactos', 'ContactosController@showPage');
         Route::post('/contactos', 'ContactosController@store')->name('contactos');
         Route::get('/contacto-editar', 'ContactosController@updatePage');
@@ -76,9 +81,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::post('/agregar-tematica', 'TematicasController@store')->name('agregar-tematica');
         Route::post('/agregar-origen', 'OrigenController@store')->name('agregar-origen');
 
-        /**
-         * Logout Routes
-         */
         Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
     });
 });

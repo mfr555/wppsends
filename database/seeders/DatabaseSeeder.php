@@ -23,9 +23,10 @@ class DatabaseSeeder extends Seeder
             OrigenSeeder2::class,
             ContactoSeeder::class,
             ComunicacionContactoSeeder::Class,
-            PrefCristianosSeeder::Class,*/
+            PrefCristianosSeeder::Class,
+            UserNameSeeder::class,*/
 
-            UserNameSeeder::class,
+            ListaSeeder::class,
         ]);
     }
 }

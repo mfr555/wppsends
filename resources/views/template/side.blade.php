@@ -39,6 +39,24 @@
                 <span>Campañas de Wpp</span></a>
         </li>
 
+        @can('view', 'App\\Models\Lista')
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                <i class="fas fa-fw fa-list"></i>
+                <span>Listas</span>
+            </a>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+
+                    @can('view', 'App\\Models\Lista')
+                        <a class="collapse-item" href="{{ route('listas') }}">Ver listado</a>
+                    @endcan
+
+                </div>
+            </div>
+        </li>
+        @endcan
+
         @can('view', 'App\\Models\User')
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('user.index') }}">
