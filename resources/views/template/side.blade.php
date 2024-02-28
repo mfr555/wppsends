@@ -52,6 +52,10 @@
                         <a class="collapse-item" href="{{ route('listas') }}">Ver listado</a>
                     @endcan
 
+                    @can('edit', 'App\\Models\Lista')
+                        <a class="collapse-item" href="{{ route('listas.create') }}">Nueva</a>
+                    @endcan
+
                 </div>
             </div>
         </li>

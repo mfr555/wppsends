@@ -52,6 +52,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         //Listas
         Route::prefix('listas')->group(function() {
             Route::get('/', 'ListaController@index')->name('listas');
+            Route::get('/create', 'ListaController@create')->name('listas.create');
+            Route::post('/store', 'ListaController@store')->name('listas.store');
+            Route::get('/{id}/edit', 'ListaController@edit')->name('listas.edit');
+            Route::post('/update', 'ListaController@update')->name('listas.update');
         });
 
         Route::get('/contactos', 'ContactosController@showPage');

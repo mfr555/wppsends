@@ -8,7 +8,7 @@
     <section>
         <h2 class="h4 text-weight-bold">Listas</h2>
 
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">
@@ -25,6 +25,10 @@
                                     <th>Estado del número</th>
                                     <th>Agrupación</th>
                                     <th>Notas</th>
+                                    <th>Actualiz.</th>
+                                    <th>
+                                        <i class="fas fa-toolbox"></i>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,6 +52,12 @@
                                         </td>
                                         <td>{{ $lista->agrupacion }}</td>
                                         <td>{{ $lista->notas }}</td>
+                                        <td><small>{{ $lista->updated_at->diffForHumans() }}</small></td>
+                                        <td>
+                                            <a href="{{ route('listas.edit', $lista->id) }}">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
