@@ -20,36 +20,29 @@ class UsersSeeder extends Seeder
             'username' => 'mfr',
             'password' => Hash::make('1co916.'),
             'email' => 'mfrodriguez555@gmail.com',
+            'name' => 'Matías Rodriguez',
         ]);
 
         DB::table('users')->insert([
-            'username' => 'roquette',
-            'password' => Hash::make('espartano1'),
-            'email' => 'roquettedaniel@gmail.com',
+            'username' => 'jalvarez',
+            'password' => Hash::make('jhonita367.'),
+            'email' => 'alvarezjonathan367@gmail.com',
+            'name' => 'Jonathan Alvarez',
         ]);
 
         DB::table('users')->insert([
-            'username' => 'maxi',
-            'password' => Hash::make('0poliza'),
-            'email' => 'maxi.rubiles3@gmail.com',
+            'username' => 'aclavijo',
+            'password' => Hash::make('clavi19.'),
+            'email' => 'agusclavijo19@gmail.com',
+            'name' => 'Agustín Clavijo',
         ]);
 
         DB::table('users')->insert([
-            'username' => 'ines',
-            'password' => Hash::make('chicanueva'),
-            'email' => 'inessanzsaccone@gmail.com ',
+            'username' => 'atabarez',
+            'password' => Hash::make('ataba12.'),
+            'email' => 'adriantabarez12@gmail.com',
+            'name' => 'Adrián Tabarez',
         ]);
 
-        DB::table('users')->insert([
-            'username' => 'desconocido',
-            'password' => Hash::make('desconocido'),
-            'email' => 'desconocido@desconocido.com ',
-        ]);
-
-        DB::table('users')->insert([
-            'username' => 'petit',
-            'password' => Hash::make('1balsa'),
-            'email' => 'samuelpetitvera@gmail.com ',
-        ]);
     }
 }

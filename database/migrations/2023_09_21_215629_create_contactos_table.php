@@ -31,6 +31,9 @@ return new class extends Migration
             $table->unsignedBigInteger('origen_id')->nullable();
             $table->foreign('origen_id')->references('id')->on('origens');
 
+            $table->unsignedBigInteger('unidad_mv_id')->nullable();
+            $table->foreign('unidad_mv_id')->references('id')->on('unidades_mv');
+
             $table->timestamps();
         });
     }

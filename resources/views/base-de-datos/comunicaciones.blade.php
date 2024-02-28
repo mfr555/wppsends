@@ -12,6 +12,7 @@
     <h2 class="h2 mb-2">Administrar campañas de comunicación</h2>
     <div class="row">
 
+        @can('edit', 'App\\Models\Comunicacion')
         <div class="col-12">
             <div class="card shadow mb-4" id="comunicaciones">
                 <div class="card-header py-3">
@@ -137,6 +138,7 @@
             </div>
 
         </div>
+        @endcan
 
 
         <div class="col-lg-12">
@@ -171,7 +173,7 @@
                                             </p>
 
                                             <div class="d-flex justify-content-end">
-                                                @if ($oneCom->activa)
+                                                @if ($oneCom->activa && Gate::allows('edit', 'App\\Models\Comunicacion'))
                                                     <form action="finalizar-comunicacion" method="POST">
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{$oneCom->id}}" >

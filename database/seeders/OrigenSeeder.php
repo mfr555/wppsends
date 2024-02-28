@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Origen;
 use App\Models\User;
 
 class OrigenSeeder extends Seeder
@@ -18,23 +19,20 @@ class OrigenSeeder extends Seeder
     public function run()
     {
         DB::table('origens')->insert([
-            'nombre' => 'Jóvenes 2022',
+            'nombre' => 'Brak 2024',
             'fecha' => Carbon::parse('2022-10-01'),
         ]);
 
-        DB::table('origens')->insert([
-            'nombre' => 'Pastores 2023',
-            'fecha' => Carbon::parse('2023-09-01'),
-        ]);
-
-        $mfr = User::where('username','mfr')->get()->first()->id;
-
-        DB::table('origens')->insert([
-            'nombre' => 'Contactos Matías Rodriguez',
-            'fecha' => Carbon::parse('2023-09-08'),
-            'user_id' => $mfr,
-        ]);
-
+        $users = User::get();
+        foreach ($users as $user){
+            if ( Origen::where('user_id',$user->id)->get()->first() == null
+              &&  $user->username != 'desconocido' ){
+                $origen = new Origen;
+                $origen->nombre = "Contactos ".$user->username;
+                $origen->user_id = $user->id;
+                $origen->save();
+            }
+        }
 
     }
 }

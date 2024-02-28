@@ -2,11 +2,10 @@
 
 namespace App\Policies;
 
-use Illuminate\Auth\Access\HandlesAuthorization;
-use App\Models\Lista;
 use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ListaPolicy
+class ComunicacionPolicy
 {
     use HandlesAuthorization;
 
@@ -20,15 +19,11 @@ class ListaPolicy
         //
     }
 
-    /**
-     * Por el momento todos los usuarios pueden ver usuarios
-     */
     public function view(User $user){
         return false;
     }
 
     public function edit(User $user){
-        return false;
+        return $user->username == 'mfr';
     }
-
 }

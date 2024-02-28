@@ -4,8 +4,9 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
             <div class="sidebar-brand">
-                <img src="{{ asset('img/logo/blanco.png') }}" alt="Plan País logo" >
+                <i class="fa fa-home m-2" aria-hidden="true"></i>
             </div>
+            <div class="sidebar-brand-text mx-3">WhatsApp Sends</div>
         </a>
 
         <!-- Divider -->

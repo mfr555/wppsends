@@ -30,6 +30,7 @@ class Contacto extends Model
         'comentarios',
         'departamento_id',
         'origen_id',
+        'unidad_mv_id',
     ];
 
     public function getPreferencias(): HasMany
