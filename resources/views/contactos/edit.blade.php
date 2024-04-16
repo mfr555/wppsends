@@ -19,7 +19,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Datos del contacto</h6>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('contacto-editar') }}" method="POST">
+                    <form action="{{ route('contacto.update') }}" method="POST">
                         @csrf
                         <input type="hidden" name="id" value="{{ $contacto->id }}">
                         @if ($contacto->lista_negra)
@@ -41,6 +41,19 @@
                                 <input type="text" id="apellido" name="apellido" class="form-control"
                                 vlaue="{{ $contacto->apellido }}">
                             </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sexo">Sexo</label>
+                            <select class="custom-select" id="sexo" name="sexo" required>
+                                <option {{ !isset($contacto->sexo) ? 'selected' : ''}}></option>
+                                <option value="Masculino" {{ isset($contacto->sexo) && $contacto->sexo=='Masculino' ? 'selected' : ''}}>
+                                    Masculino
+                                </option>
+                                <option value="Femenino" {{ isset($contacto->sexo) && $contacto->sexo=='Femenino' ? 'selected' : ''}}>
+                                    Femenino
+                                </option>
+                            </select>
                         </div>
 
                         <div class="form-group">

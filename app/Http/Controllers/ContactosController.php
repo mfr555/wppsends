@@ -27,7 +27,7 @@ class ContactosController extends Controller
                         ]);
     }
 
-    public function updatePage(Request $request){
+    public function edit(Request $request){
         $validated = $request->validate(['id' => 'required|exists:contactos,id']);
         $contacto = Contacto::where('id', $request->id)->get()->first();
         $origenes = Origen::get();
@@ -35,7 +35,7 @@ class ContactosController extends Controller
         if (!$validated){
             return redirect('/');
         } else {
-            return view('base-de-datos.contacto-editar',
+            return view('contactos.edit',
                             ['contacto' => $contacto,
                             'origenes' => $origenes,
                             'deptos' => $deptos,
@@ -117,7 +117,7 @@ class ContactosController extends Controller
         if(isset($request->apellido)){
             $contacto->apellido = $request->apellido;
         }
-        //$contacto->sexo = $request->sexo;
+        $contacto->sexo = $request->sexo;
         $contacto->cel = $request->cel;
         if(isset($request->departamento_id)){
             $contacto->departamento_id = $request->apelldepartamento_idido;
